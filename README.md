@@ -39,3 +39,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - ProfilePlus Architecture Milestone 2/10: feat(utils): implement high-performance SVG string template engine
 
 - ProfilePlus Architecture Milestone 3/10: feat(api): create /api/stats endpoint with real-time GitHub fetching
+
+- ProfilePlus Architecture Milestone 4/10: feat(utils): implement GitHub GraphQL fetcher with PAT fallback logic
