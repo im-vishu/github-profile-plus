@@ -35,3 +35,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - Add support for `/api/top-langs`, `/api/trophies`, plugin system, and more!
 - For contributors: see `CONTRIBUTING.md` (coming soon)
 - ProfilePlus Architecture Milestone 1/10: feat(server): initialize Express.js core with modular middleware stack
+
+- ProfilePlus Architecture Milestone 2/10: feat(utils): implement high-performance SVG string template engine
