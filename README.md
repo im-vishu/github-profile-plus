@@ -45,3 +45,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - ProfilePlus Architecture Milestone 5/10: feat(themes): initialize centralized theme registry (Dark/Monokai/High-Contrast)
 
 - ProfilePlus Architecture Milestone 6/10: feat(plugins): implement auto-discovery logic for user-contributed widgets
+
+- ProfilePlus Architecture Milestone 7/10: test(api): add supertest suite for SVG response validation and headers
