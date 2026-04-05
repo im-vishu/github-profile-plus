@@ -51,3 +51,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - ProfilePlus Architecture Milestone 8/10: build(infra): configure production Dockerfile with Node-20 Alpine base
 
 - ProfilePlus Architecture Milestone 9/10: chore(config): set up .env.example for secure GitHub Token management
+
+- ProfilePlus Architecture Milestone 10/10: docs: finalize README.md with deployment guides and API usage examples
