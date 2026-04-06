@@ -63,3 +63,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 4/31: feat(services): initialize GitHub API GraphQL service for core stats
 
 - GitHub Profile Plus Milestone 5/31: feat(services): implement repository and user data fetching logic
+
+- GitHub Profile Plus Milestone 6/31: feat(services): implement languages.ts for top language aggregation
