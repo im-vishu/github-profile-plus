@@ -176,3 +176,5 @@ MIT © [im-vishu](https://github.com/im-vishu)
 - ProfilePlus Plugin Milestone 7/10: feat(api): implement auto-listing of registered plugins via /api/widget
 
 - ProfilePlus Plugin Milestone 8/10: refactor(api): add robust error handling and SVG fallbacks for plugin failures
+
+- ProfilePlus Plugin Milestone 9/10: style(plugins): add support for global theme propagation to all widgets
