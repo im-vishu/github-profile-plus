@@ -83,3 +83,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 14/31: feat(templates): create trophiesCard.ejs with trophy-grid layout
 
 - GitHub Profile Plus Milestone 15/31: feat(templates): implement quotesCard.ts for text-wrap rendering
+
+- GitHub Profile Plus Milestone 16/31: feat(templates): create quotesCard.ejs with specialized typography
