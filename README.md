@@ -59,3 +59,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 2/31: feat(infra): set up app.ts entrypoint with Express and TS-Node support
 
 - GitHub Profile Plus Milestone 3/31: feat(theme): implement centralized theme engine in theme/index.ts
+
+- GitHub Profile Plus Milestone 4/31: feat(services): initialize GitHub API GraphQL service for core stats
