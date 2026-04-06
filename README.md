@@ -91,3 +91,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 18/31: feat(api): implement /api/top-langs handler for language stats
 
 - GitHub Profile Plus Milestone 19/31: feat(api): implement /api/trophies handler for achievement cards
+
+- GitHub Profile Plus Milestone 20/31: feat(api): implement /api/quotes handler for dev quotes
