@@ -164,3 +164,5 @@ MIT © [im-vishu](https://github.com/im-vishu)
 - ProfilePlus Plugin Milestone 1/10: feat(plugins): define Plugin and PluginContext interfaces in index.ts
 
 - ProfilePlus Plugin Milestone 2/10: feat(plugins): implement centralized plugin registry and loader logic
+
+- ProfilePlus Plugin Milestone 3/10: feat(plugins): create sampleWidget plugin for SVG architecture testing
