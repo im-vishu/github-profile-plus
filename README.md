@@ -174,3 +174,5 @@ MIT © [im-vishu](https://github.com/im-vishu)
 - ProfilePlus Plugin Milestone 6/10: fix(api): resolve TS2345 type error by sanitizing pluginName parameters
 
 - ProfilePlus Plugin Milestone 7/10: feat(api): implement auto-listing of registered plugins via /api/widget
+
+- ProfilePlus Plugin Milestone 8/10: refactor(api): add robust error handling and SVG fallbacks for plugin failures
