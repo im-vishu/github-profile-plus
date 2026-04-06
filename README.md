@@ -69,3 +69,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 7/31: feat(services): implement trophies.ts for achievement rank calculation
 
 - GitHub Profile Plus Milestone 8/31: feat(services): implement quotes.ts for developer quote retrieval
+
+- GitHub Profile Plus Milestone 9/31: feat(templates): initialize core card.ts base SVG renderer
