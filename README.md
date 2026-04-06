@@ -103,3 +103,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 24/31: style(templates): optimize SVG viewbox and responsive scaling
 
 - GitHub Profile Plus Milestone 25/31: style(templates): add CSS animation support for SVG trophy entrance
+
+- GitHub Profile Plus Milestone 26/31: test: implement integration tests for /api/stats SVG output
