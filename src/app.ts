@@ -3,6 +3,7 @@ import statsRoute from "./api/stats";
 import topLangsRoute from "./api/topLangs";
 import trophiesRoute from "./api/trophies";
 import quotesRoute from "./api/quotes";
+import widgetRoute from "./api/widget";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,7 @@ app.get("/api/stats", statsRoute);
 app.get("/api/top-langs", topLangsRoute);
 app.get("/api/trophies", trophiesRoute);
 app.get("/api/quotes", quotesRoute);
+app.get("/api/widget/:pluginName", widgetRoute);
 
 app.get("/", (_req, res) => {
   res.send(
