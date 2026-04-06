@@ -162,3 +162,5 @@ MIT © [im-vishu](https://github.com/im-vishu)
 > **GitHub Profile Plus** — making your README pop, together with the open source community!
 
 - ProfilePlus Plugin Milestone 1/10: feat(plugins): define Plugin and PluginContext interfaces in index.ts
+
+- ProfilePlus Plugin Milestone 2/10: feat(plugins): implement centralized plugin registry and loader logic
