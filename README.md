@@ -101,3 +101,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 23/31: refactor(theme): add support for custom user-defined HEX colors
 
 - GitHub Profile Plus Milestone 24/31: style(templates): optimize SVG viewbox and responsive scaling
+
+- GitHub Profile Plus Milestone 25/31: style(templates): add CSS animation support for SVG trophy entrance
