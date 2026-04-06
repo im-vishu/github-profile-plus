@@ -178,3 +178,5 @@ MIT © [im-vishu](https://github.com/im-vishu)
 - ProfilePlus Plugin Milestone 8/10: refactor(api): add robust error handling and SVG fallbacks for plugin failures
 
 - ProfilePlus Plugin Milestone 9/10: style(plugins): add support for global theme propagation to all widgets
+
+- ProfilePlus Plugin Milestone 10/10: docs: finalize Plugin System architecture and authoring guide
