@@ -3,6 +3,7 @@ import { getGitHubProfileStats } from "../services/github";
 import { renderProfileCard } from "../templates/card";
 import { getTheme } from "../theme";
 
+
 export default async function statsRoute(req: Request, res: Response) {
   const username = (req.query.username as string)?.trim();
   const themeName = ((req.query.theme as string) || "light").toLowerCase();

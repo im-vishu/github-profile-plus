@@ -1,0 +1,15 @@
+<svg width="430" height="150" viewBox="0 0 430 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 18px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.text %>; }
+    .label { font: 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.text %>; }
+    .val { font: bold 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.accent %>; }
+    .emoji { font-size: 20px; }
+    .card { fill: <%= theme.background %>; stroke: <%= theme.border %>; }
+  </style>
+  <rect x="1" y="1" width="428" height="148" class="card" stroke-width="2"/>
+  <text x="30" y="40" class="title">Trophies for <%= username %></text>
+  <% trophies.forEach((trophy, i) => { %>
+    <text x="40" y="<%= 70+i*20 %>" class="label"><tspan class="emoji"><%= trophy.emoji %></tspan> <%= trophy.title %>:</text>
+    <text x="210" y="<%= 70+i*20 %>" class="val"><%= trophy.value %></text>
+  <% }) %>
+</svg>

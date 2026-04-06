@@ -53,3 +53,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - ProfilePlus Architecture Milestone 9/10: chore(config): set up .env.example for secure GitHub Token management
 
 - ProfilePlus Architecture Milestone 10/10: docs: finalize README.md with deployment guides and API usage examples
+
+- GitHub Profile Plus Milestone 1/31: chore: initialize TypeScript project structure and compiler options

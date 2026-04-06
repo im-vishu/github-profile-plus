@@ -1,14 +1,26 @@
 import express from "express";
 import statsRoute from "./api/stats";
+import topLangsRoute from "./api/topLangs";
+import trophiesRoute from "./api/trophies";
+import quotesRoute from "./api/quotes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get("/api/stats", statsRoute);
+app.get("/api/top-langs", topLangsRoute);
+app.get("/api/trophies", trophiesRoute);
+app.get("/api/quotes", quotesRoute);
 
 app.get("/", (_req, res) => {
   res.send(
-    "<h1>GitHub Profile Plus API</h1><p>Use <code>/api/stats?username=&lt;github-username&gt;</code> for SVG stats cards.</p>"
+    "<h1>GitHub Profile Plus API</h1>" +
+    "<ul>" +
+    "<li>/api/stats?username=...</li>" +
+    "<li>/api/top-langs?username=...</li>" +
+    "<li>/api/trophies?username=...</li>" +
+    "<li>/api/quotes</li>" +
+    "</ul>"
   );
 });
 

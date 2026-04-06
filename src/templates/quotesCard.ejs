@@ -1,0 +1,10 @@
+<svg width="430" height="110" viewBox="0 0 430 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .quote { font: italic 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.text %>; }
+    .author { font: bold 12px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.accent %>; }
+    .card { fill: <%= theme.background %>; stroke: <%= theme.border %>; }
+  </style>
+  <rect x="1" y="1" width="428" height="108" class="card" stroke-width="2"/>
+  <text x="30" y="50" class="quote">"<%= quote.quote %>"</text>
+  <text x="310" y="80" class="author">- <%= quote.author %></text>
+</svg>
