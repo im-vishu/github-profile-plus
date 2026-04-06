@@ -166,3 +166,5 @@ MIT © [im-vishu](https://github.com/im-vishu)
 - ProfilePlus Plugin Milestone 2/10: feat(plugins): implement centralized plugin registry and loader logic
 
 - ProfilePlus Plugin Milestone 3/10: feat(plugins): create sampleWidget plugin for SVG architecture testing
+
+- ProfilePlus Plugin Milestone 4/10: feat(plugins): implement leetcodeStats plugin for external API integration
