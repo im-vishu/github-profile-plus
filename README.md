@@ -113,3 +113,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 29/31: chore: update package.json with EJS and TypeScript dependencies
 
 - GitHub Profile Plus Milestone 30/31: docs: update README.md with v1 endpoint documentation
+
+- GitHub Profile Plus Milestone 31/31: docs: finalize Phase 2 architecture and plugin manifest
