@@ -55,3 +55,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - ProfilePlus Architecture Milestone 10/10: docs: finalize README.md with deployment guides and API usage examples
 
 - GitHub Profile Plus Milestone 1/31: chore: initialize TypeScript project structure and compiler options
+
+- GitHub Profile Plus Milestone 2/31: feat(infra): set up app.ts entrypoint with Express and TS-Node support
