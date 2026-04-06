@@ -170,3 +170,5 @@ MIT © [im-vishu](https://github.com/im-vishu)
 - ProfilePlus Plugin Milestone 4/10: feat(plugins): implement leetcodeStats plugin for external API integration
 
 - ProfilePlus Plugin Milestone 5/10: feat(api): initialize /api/widget/:pluginName route handler
+
+- ProfilePlus Plugin Milestone 6/10: fix(api): resolve TS2345 type error by sanitizing pluginName parameters
