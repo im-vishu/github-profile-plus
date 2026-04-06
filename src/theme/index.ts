@@ -1,25 +1,27 @@
-export interface Theme {
-  background: string;
-  text: string;
-  accent: string;
-  border: string;
+import { THEME_PRESETS, Theme } from "./presets";
+
+// Utility to validate hex color (basic, improve as needed)
+function isHexColor(str: string): boolean {
+  return /^#[0-9A-Fa-f]{6}$/.test(str);
 }
 
-const THEMES: Record<string, Theme> = {
-  light: {
-    background: "#fff",
-    text: "#222",
-    accent: "#0366d6",
-    border: "#E4E2E2",
-  },
-  dark: {
-    background: "#22272e",
-    text: "#fff",
-    accent: "#58a6ff",
-    border: "#444c56",
-  },
-};
+// Merge user colors/config into theme preset
+export function resolveTheme(themeName: string, custom: Partial<Theme> = {}): Theme {
+  const base = THEME_PRESETS[themeName] || THEME_PRESETS.light;
+  return {
+    ...base,
+    ...Object.fromEntries(Object.entries(custom)
+      .filter(([k, v]) => typeof v === "string" && (isHexColor(v) || k === "name" || k === "font")))
+  };
+}
 
-export function getTheme(name: string): Theme {
-  return THEMES[name] || THEMES.light;
+// Extract custom theme params from query/config
+export function getCustomThemeFromQuery(query: Record<string, string | undefined>): Partial<Theme> {
+  // e.g. /api/*?background=%23abcdef&text=%23333&accent=%23d11...
+  const keys = ["background", "text", "accent", "border", "font"]; // whitelist
+  const out: Partial<Theme> = {};
+  for (const k of keys) {
+    if (query[k]) out[k] = query[k]!;
+  }
+  return out;
 }
