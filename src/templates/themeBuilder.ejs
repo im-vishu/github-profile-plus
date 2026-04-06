@@ -1,0 +1,12 @@
+<svg width="420" height="170" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: <%= theme.background %>; }
+    .main { fill: <%= theme.text %>; font: bold 19px 'Segoe UI', Ubuntu, Sans-Serif; }
+    .accent { fill: <%= theme.accent %>; font: bold 16px 'Segoe UI', Ubuntu, Sans-Serif; }
+    .border { fill: none; stroke: <%= theme.border %>; stroke-width: 3; }
+  </style>
+  <rect x="0" y="0" width="420" height="170" class="bg border"/>
+  <text x="210" y="60" text-anchor="middle" class="main">Theme Preview: <%= theme.name %></text>
+  <text x="210" y="90" text-anchor="middle" class="accent">Accent sample</text>
+  <text x="210" y="130" text-anchor="middle" class="main" font-size="13">background: <%= theme.background %> | text: <%= theme.text %> | accent: <%= theme.accent %></text>
+</svg>
