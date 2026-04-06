@@ -109,3 +109,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 27/31: test: implement unit tests for language percentage calculations
 
 - GitHub Profile Plus Milestone 28/31: test: verify trophy ranking logic for various GitHub profiles
+
+- GitHub Profile Plus Milestone 29/31: chore: update package.json with EJS and TypeScript dependencies
