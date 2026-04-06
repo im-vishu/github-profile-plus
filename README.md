@@ -75,3 +75,5 @@ Open [http://localhost:3000/api/stats?username=octocat](http://localhost:3000/ap
 - GitHub Profile Plus Milestone 10/31: feat(templates): implement EJS-based card.ejs base layout
 
 - GitHub Profile Plus Milestone 11/31: feat(templates): implement langsCard.ts for language SVG rendering
+
+- GitHub Profile Plus Milestone 12/31: feat(templates): create langsCard.ejs template with bar-chart logic
