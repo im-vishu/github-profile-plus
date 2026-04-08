@@ -1,6 +1,6 @@
 import { THEME_PRESETS, Theme } from "./presets";
 
-// Utility to validate hex color (basic, improve as needed)
+// Utility to validate hex color (basic, can improve if desired)
 function isHexColor(str: string): boolean {
   return /^#[0-9A-Fa-f]{6}$/.test(str);
 }
@@ -8,10 +8,14 @@ function isHexColor(str: string): boolean {
 // Merge user colors/config into theme preset
 export function resolveTheme(themeName: string, custom: Partial<Theme> = {}): Theme {
   const base = THEME_PRESETS[themeName] || THEME_PRESETS.light;
+  // Only merge in valid, present (non-undefined) strings
+  const customSanitized = Object.entries(custom).reduce((acc, [k, v]) => {
+    if (typeof v === "string" && v) acc[k] = v;
+    return acc;
+  }, {} as Record<string, string>);
   return {
     ...base,
-    ...Object.fromEntries(Object.entries(custom)
-      .filter(([k, v]) => typeof v === "string" && (isHexColor(v) || k === "name" || k === "font")))
+    ...customSanitized
   };
 }
 
@@ -25,3 +29,6 @@ export function getCustomThemeFromQuery(query: Record<string, string | undefined
   }
   return out;
 }
+
+// Re-export the Theme type for consumers
+export type { Theme };
