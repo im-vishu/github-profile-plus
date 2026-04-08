@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { getGitHubProfileStats } from "../services/github";
 import { renderProfileCard } from "../templates/card";
-import { getTheme } from "../theme";
-
+import { resolveTheme, getCustomThemeFromQuery } from "../theme";
 
 export default async function statsRoute(req: Request, res: Response) {
   const username = (req.query.username as string)?.trim();
   const themeName = ((req.query.theme as string) || "light").toLowerCase();
+  const customTheme = getCustomThemeFromQuery(req.query as any);
+  const theme = resolveTheme(themeName, customTheme);
 
   if (!username) {
     return res
@@ -15,7 +16,6 @@ export default async function statsRoute(req: Request, res: Response) {
   }
   try {
     const stats = await getGitHubProfileStats(username);
-    const theme = getTheme(themeName);
     const svg = renderProfileCard(stats, theme);
 
     res.setHeader("Content-Type", "image/svg+xml");
