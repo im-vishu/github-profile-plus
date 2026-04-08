@@ -7,6 +7,8 @@ const theme_1 = require("../theme");
 async function statsRoute(req, res) {
     const username = req.query.username?.trim();
     const themeName = (req.query.theme || "light").toLowerCase();
+    const customTheme = (0, theme_1.getCustomThemeFromQuery)(req.query);
+    const theme = (0, theme_1.resolveTheme)(themeName, customTheme);
     if (!username) {
         return res
             .status(400)
@@ -14,7 +16,6 @@ async function statsRoute(req, res) {
     }
     try {
         const stats = await (0, github_1.getGitHubProfileStats)(username);
-        const theme = (0, theme_1.getTheme)(themeName);
         const svg = (0, card_1.renderProfileCard)(stats, theme);
         res.setHeader("Content-Type", "image/svg+xml");
         res.setHeader("Cache-Control", "public, max-age=120");
