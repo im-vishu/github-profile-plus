@@ -1,182 +1,145 @@
-# 🚀 GitHub Profile Plus
+# GitHub Profile Plus
 
-Modern, extensible platform for generating dynamic GitHub profile stats, badges, and widgets!
+An Express + TypeScript service that generates themeable SVG profile cards for GitHub users — stats, top languages, trophies, and more. Cards are lightweight and suitable for README badges, profile pages, or any location that accepts SVG.
 
----
+## Features
+- /api/stats — profile stats card (repos, followers, avatar)
+- /api/top-langs — top languages card (bar chart)
+- /api/trophies — trophies card
+- Themeable: built-in themes plus custom theme query overrides
+- Server-side SVG templates for fast rendering
+- Example GitHub service helpers that call the GitHub REST API
 
-## 🎯 Features
+## Prerequisites
+- Node.js 18+ (recommended)
+- npm
+- (Optional) GitHub Personal Access Token to avoid API rate limits
 
-- **Dynamic SVG/PNG Stats Cards** for GitHub profiles
-- **Top Languages, Trophies, Quotes & Contribution Heatmaps**
-- **Robust Plugin System:** Add your own widgets via `/api/widget/:pluginName`
-- **Easy Theming:** Light/dark/custom themes; theme builder planned
-- **Fast, Modular REST API:** Production-ready
-- **Multi-source Integrations:** LeetCode, Stack Overflow, more (plugin-based)
-- **Self-hosting:** Via Docker or Node.js
-- **Developer-first:** Great docs, API DX, plugin scaffolding
-- **Scalable, Open Source, Community-Driven**
+## Quick start
 
----
-
-## 🚀 Quickstart
-
-### 1. **Clone & Install**
-
+1. Clone and install
 ```bash
-git clone https://github.com/im-vishu/github-profile-plus.git
+git clone <repo-url>
 cd github-profile-plus
 npm install
 ```
 
-### 2. **Run in Dev Mode**
+2. (Optional) Provide a GitHub token to increase API rate limits:
+- macOS / Linux:
+```bash
+export GITHUB_TOKEN="ghp_..."
+npm run dev
+```
+- Windows (PowerShell):
+```powershell
+$env:GITHUB_TOKEN="ghp_..."
+npm run dev
+```
 
+3. Run the development server
 ```bash
 npm run dev
-# or, for production:
-npm run build
-npm start
 ```
+The dev server uses `ts-node-dev` and restarts automatically on file changes.
 
-### 3. **Try the Endpoints!**
+## Available npm scripts
+- `npm run dev` — start dev server with `ts-node-dev`
+- (Add production build/start scripts as needed, e.g., `build` and `start` using `tsc`)
 
-- **GitHub Stats Card:**  
-  `http://localhost:3000/api/stats?username=octocat`
+## Environment variables
+- `GITHUB_TOKEN` — (optional) GitHub PAT to increase API rate limits and access private data if required.
 
-- **Top Languages:**  
-  `http://localhost:3000/api/top-langs?username=octocat`
+## API Endpoints
 
-- **Trophies:**  
-  `http://localhost:3000/api/trophies?username=octocat`
+All endpoints that return cards respond with `Content-Type: image/svg+xml`.
 
-- **Random Quote:**  
-  `http://localhost:3000/api/quotes`
+- GET `/api/health`
+  - Returns JSON health info: `{ status: "ok", uptime: ... }`
 
-- **Widgets/Plugins:**  
-  `http://localhost:3000/api/widget/sample-widget`  
-  `http://localhost:3000/api/widget/leetcode-stats?username=octocat`  
-  `http://localhost:3000/api/widget` (list)
+- GET `/api/stats`
+  - Query params:
+    - `username` (required) — GitHub username
+    - `theme` (optional) — theme name (`light`, `dark`, etc.)
+    - Custom theme overrides — supported via query keys defined in `getCustomThemeFromQuery`
+  - Example:
+    - `/api/stats?username=octocat&theme=dark`
 
-### 4. **Try with Docker**
+- GET `/api/top-langs`
+  - Query params:
+    - `username` (required)
+    - `theme` (optional)
+  - Example:
+    - `/api/top-langs?username=octocat&theme=light`
 
-```bash
-docker build -t github-profile-plus .
-docker run -p 3000:3000 github-profile-plus
-```
+- GET `/api/trophies`
+  - Query params:
+    - `username` (required)
+    - `theme` (optional)
+  - Example:
+    - `/api/trophies?username=octocat&theme=radical`
 
----
+Notes about theming:
+- Use a built-in theme name via `?theme=light` (or `dark`, etc.).
+- Use custom theme overrides via the query params supported by `getCustomThemeFromQuery` (e.g., `?bg_color=#fff&text_color=#000`). The exact parameter keys depend on your `theme` implementation — check `src/theme.ts`.
 
-## 🧩 API Endpoints
+## Project layout (important files)
+- src/
+  - app.ts — Express app, route registration
+  - api/
+    - stats.ts — `/api/stats` handler (default export)
+    - topLangs.ts — `/api/top-langs` handler (default export)
+    - trophies.ts — `/api/trophies` handler (default export)
+  - services/
+    - github.ts — GitHub helpers (exports `getGitHubProfileStats`, `getUserTopLanguages`, `TopLanguage` interface)
+  - templates/
+    - topLangs.ts — SVG renderer for top languages
+    - card.ts / trophiesCard.ts — other SVG templates
+  - theme.ts — theming utilities (`resolveTheme`, `getCustomThemeFromQuery`, `Theme` type)
 
-| Endpoint                          | Description                                    |
-|------------------------------------|------------------------------------------------|
-| `/api/stats?username=USER`         | GitHub profile stats card (SVG)                |
-| `/api/top-langs?username=USER`     | Top used programming languages (SVG)           |
-| `/api/trophies?username=USER`      | Achievement/trophy card                        |
-| `/api/quotes`                      | Random dev/programming quote                   |
-| `/api/widget/:pluginName[...]`     | Dynamic widget/plugin, supports params         |
-| `/api/widget`                      | Lists all registered plugins                   |
+## Implementation notes & recommendations
+- Include `GITHUB_TOKEN` in axios headers inside `src/services/github.ts` if present:
+  ```ts
+  const headers = process.env.GITHUB_TOKEN ? { Authorization: `token ${process.env.GITHUB_TOKEN}` } : {};
+  axios.get(url, { headers });
+  ```
+- Add caching (in-memory or Redis) for GitHub responses to reduce API calls and improve performance.
+- Sanitize and validate user-supplied query parameters (especially for colors or fonts).
+- For production, build TypeScript to JS (`tsc`) and run the compiled output with Node instead of `ts-node-dev`.
 
-
----
-
-## 🧑‍💻 **Creating a Plugin**
-
-1. **Create a new file** in `src/plugins/`, e.g. `myWidget.ts`:
-
-    ```typescript
-    import type { Plugin } from "./index";
-    const myPlugin: Plugin = {
-      name: "my-widget",
-      description: "My custom widget.",
-      handler: ({ query, theme }) => {
-        return `<svg width="200" ...>...</svg>`;
-      }
-    };
-    export default myPlugin;
+## Troubleshooting / Common issues
+- "Cannot find module '../templates/topLangs'":
+  - Ensure `src/templates/topLangs.ts` exists and the import path matches exactly.
+- "Module ... has no default export":
+  - Route handlers should default-export the handler:
+    ```ts
+    export default async function routeHandler(req, res) { ... }
+    ```
+  - And import without braces:
+    ```ts
+    import statsRoute from "./api/stats";
+    ```
+- Missing types for packages (example: `cors`):
+  - Install the package and its types:
+    ```bash
+    npm install cors
+    npm install --save-dev @types/cors
     ```
 
-2. **Your widget shows up automatically** at  
-   `http://localhost:3000/api/widget/my-widget`
+## Extending the project
+- Add new endpoints in `src/api/` (keep the default export pattern).
+- Add new SVG templates in `src/templates/` and call them from API handlers.
+- Expand `src/services/github.ts` to fetch additional data (contributions, language bytes, repo stats).
+- Add unit/integration tests for handlers and templates.
 
-3. **Visit** `/api/widget` for a full list of available plugins.
+## Contributing
+Contributions are welcome. Suggested workflow:
+1. Fork the repository
+2. Create a feature branch
+3. Open a pull request with a clear description and tests if applicable
 
-_See [`docs/plugins.md`](docs/plugins.md) for full authoring guide!_
+## License
+MIT
 
----
-
-## 📦 Configuration & Theming
-
-- Pass `theme=light|dark|custom` as a query param to any endpoint
-- (WIP) Full config import/export and theme builder coming soon
-
----
-
-## 🛡️ Production & Docker
-
-- **Dockerfile** included for ready-to-run deployments
-- **.env support** for configuration (add GITHUB_TOKEN, etc.)
-
----
-
-## 🧪 Testing
-
-- Visit any endpoint in your browser or use `curl`
-- (Upcoming) Jest-based automated suite for API, plugins, SVGs
-
----
-
-## 🔌 Integrations & Marketplace
-
-- Use `/api/widget/:pluginName` for new sources (LeetCode, Stack Overflow, RSS, etc.)
-- Submit your own plugin—see [Contributing](#contributing)!
-
----
-
-## 📝 Roadmap
-
-- [x] Core GitHub profile stats
-- [x] Top languages, trophies, quotes
-- [x] Extensible plugin system, auto-discovery
-- [ ] Advanced theming, config import/export, a11y
-- [ ] External data sources (LeetCode, Stack Overflow...)
-- [ ] CLI for card/widget preview
-- [ ] Marketplace/gallery for plugins & themes
-
----
-
-## 🤝 Contributing
-
-PRs are welcome!
-- New widgets/plugins? Just add a `.ts` file to `src/plugins/`.
-- Issues, feature requests, and docs are encouraged.
-- See [`docs/plugins.md`](docs/plugins.md) for the plugin contract.
-
----
-
-## ⭐ License
-
-MIT © [im-vishu](https://github.com/im-vishu)
-
----
-
-> **GitHub Profile Plus** — making your README pop, together with the open source community!
-
-- ProfilePlus Plugin Milestone 1/10: feat(plugins): define Plugin and PluginContext interfaces in index.ts
-
-- ProfilePlus Plugin Milestone 2/10: feat(plugins): implement centralized plugin registry and loader logic
-
-- ProfilePlus Plugin Milestone 3/10: feat(plugins): create sampleWidget plugin for SVG architecture testing
-
-- ProfilePlus Plugin Milestone 4/10: feat(plugins): implement leetcodeStats plugin for external API integration
-
-- ProfilePlus Plugin Milestone 5/10: feat(api): initialize /api/widget/:pluginName route handler
-
-- ProfilePlus Plugin Milestone 6/10: fix(api): resolve TS2345 type error by sanitizing pluginName parameters
-
-- ProfilePlus Plugin Milestone 7/10: feat(api): implement auto-listing of registered plugins via /api/widget
-
-- ProfilePlus Plugin Milestone 8/10: refactor(api): add robust error handling and SVG fallbacks for plugin failures
-
-- ProfilePlus Plugin Milestone 9/10: style(plugins): add support for global theme propagation to all widgets
-
-- ProfilePlus Plugin Milestone 10/10: docs: finalize Plugin System architecture and authoring guide
+## Contact / Support
+If you encounter issues or want additional features (more cards, themes, caching examples), open an issue or submit a PR.
+```
