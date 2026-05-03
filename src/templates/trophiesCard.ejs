@@ -1,15 +1,50 @@
-<svg width="430" height="150" viewBox="0 0 430 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="520"
+  height="220"
+  viewBox="0 0 520 220"
+  role="img"
+  aria-label="Trophies for <%= username %>"
+>
   <style>
-    .title { font: bold 18px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.text %>; }
-    .label { font: 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.text %>; }
-    .val { font: bold 15px 'Segoe UI', Ubuntu, Sans-Serif; fill: <%= theme.accent %>; }
-    .emoji { font-size: 20px; }
-    .card { fill: <%= theme.background %>; stroke: <%= theme.border %>; }
+    .bg { fill: <%= theme.background %>; }
+    .border { fill: none; stroke: <%= theme.border %>; stroke-width: 2; }
+    .title { fill: <%= theme.text %>; font: 700 20px 'Segoe UI', Ubuntu, Sans-Serif; }
+    .label { fill: <%= theme.text %>; font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; }
+    .value { fill: <%= theme.accent %>; font: 700 14px 'Segoe UI', Ubuntu, Sans-Serif; }
+    .muted { fill: <%= (theme as any).mutedText || theme.text %>; opacity: 0.8; font: 500 11px 'Segoe UI', Ubuntu, Sans-Serif; }
   </style>
-  <rect x="1" y="1" width="428" height="148" class="card" stroke-width="2"/>
-  <text x="30" y="40" class="title">Trophies for <%= username %></text>
-  <% trophies.forEach((trophy, i) => { %>
-    <text x="40" y="<%= 70+i*20 %>" class="label"><tspan class="emoji"><%= trophy.emoji %></tspan> <%= trophy.title %>:</text>
-    <text x="210" y="<%= 70+i*20 %>" class="val"><%= trophy.value %></text>
+
+  <rect x="0" y="0" width="520" height="220" rx="12" class="bg"/>
+  <rect x="1" y="1" width="518" height="218" rx="11" class="border"/>
+
+  <text x="20" y="36" class="title">Trophies</text>
+  <text x="20" y="58" class="muted">@<%= username %></text>
+
+  <%
+// Layout: 2 rows x 3 columns cards
+const cols = 3;
+const cardW = 160;
+const cardH = 62;
+const gapX = 10;
+const gapY = 10;
+const startX = 20;
+const startY = 76;
+  %>
+
+  <% trophies.slice(0, 6).forEach((t, i) => { 
+      const row = Math.floor(i / cols);
+      const col = i % cols;
+      const x = startX + col * (cardW + gapX);
+      const y = startY + row * (cardH + gapY);
+  %>
+    <g transform="translate(<%= x %>, <%= y %>)">
+      <rect x="0" y="0" width="<%= cardW %>" height="<%= cardH %>" rx="10" fill="rgba(0,0,0,0.03)" stroke="<%= theme.border %>"/>
+      <text x="14" y="26" font-size="18"><%= t.emoji %></text>
+      <text x="42" y="24" class="label"><%= t.title %></text>
+      <text x="42" y="46" class="value"><%= t.value %></text>
+    </g>
   <% }) %>
+
+  <text x="20" y="210" class="muted">Generated from public GitHub profile data</text>
 </svg>
