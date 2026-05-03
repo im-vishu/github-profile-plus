@@ -1,145 +1,391 @@
-# GitHub Profile Plus
+<div align="center">
+  <h1>GitHub Profile Plus</h1>
+  <p>Dynamic GitHub profile cards, streak stats, trophies, badges, and skill icons for your README.</p>
+</div>
 
-An Express + TypeScript service that generates themeable SVG profile cards for GitHub users — stats, top languages, trophies, and more. Cards are lightweight and suitable for README badges, profile pages, or any location that accepts SVG.
+<p align="center">
+  <a href="https://github-profile-plus.onrender.com/api/health">
+    <img alt="API Health" src="https://github-profile-plus.onrender.com/api/badge?label=api&message=online&color=brightgreen" />
+  </a>
+  <a href="https://github.com/im-vishu/github-profile-plus">
+    <img alt="Built with TypeScript" src="https://github-profile-plus.onrender.com/api/badge?label=typescript&message=express&color=3178c6" />
+  </a>
+  <a href="https://github-profile-plus.onrender.com/icons?i=ts,nodejs,express,mongodb,git&theme=dark">
+    <img alt="Skill Icons" src="https://github-profile-plus.onrender.com/api/badge?label=skill-icons&message=ready&color=blue" />
+  </a>
+</p>
 
-## Features
-- /api/stats — profile stats card (repos, followers, avatar)
-- /api/top-langs — top languages card (bar chart)
-- /api/trophies — trophies card
-- Themeable: built-in themes plus custom theme query overrides
-- Server-side SVG templates for fast rendering
-- Example GitHub service helpers that call the GitHub REST API
+<p align="center">
+  <a href="#quick-start">Quick Start</a>
+  -
+  <a href="#cards">Cards</a>
+  -
+  <a href="#skill-icons">Skill Icons</a>
+  -
+  <a href="#customization">Customization</a>
+  -
+  <a href="#self-hosting">Self-hosting</a>
+</p>
 
-## Prerequisites
-- Node.js 18+ (recommended)
-- npm
-- (Optional) GitHub Personal Access Token to avoid API rate limits
+## Overview
 
-## Quick start
+GitHub Profile Plus is an Express + TypeScript API that generates lightweight SVG assets for GitHub profile READMEs. It combines the most useful ideas from GitHub Readme Stats, GitHub Readme Streak Stats, Shields-style badges, and Skill Icons into one self-hostable service.
 
-1. Clone and install
+Live base URL:
+
+```txt
+https://github-profile-plus.onrender.com
+```
+
+All card and icon endpoints return SVG and can be embedded directly in Markdown, HTML, profile READMEs, documentation pages, and portfolio sites.
+
+## Quick Start
+
+Replace `octocat` with your GitHub username.
+
+```md
+![GitHub Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=radical)
+
+![Top Languages](https://github-profile-plus.onrender.com/api/top-langs?username=octocat&theme=tokyonight)
+
+![GitHub Streak](https://github-profile-plus.onrender.com/api/streak?username=octocat&theme=dark)
+
+![Trophies](https://github-profile-plus.onrender.com/api/trophies?username=octocat&theme=gruvbox)
+
+![My Skills](https://github-profile-plus.onrender.com/icons?i=js,ts,react,nodejs,express,mongodb,git&theme=dark)
+```
+
+## Live Demos
+
+<p align="center">
+  <img alt="GitHub stats card" src="https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=radical" />
+</p>
+
+<p align="center">
+  <img alt="Top languages card" src="https://github-profile-plus.onrender.com/api/top-langs?username=octocat&theme=tokyonight" />
+</p>
+
+<p align="center">
+  <img alt="GitHub streak card" src="https://github-profile-plus.onrender.com/api/streak?username=octocat&theme=dark" />
+</p>
+
+<p align="center">
+  <img alt="Skill icons" src="https://github-profile-plus.onrender.com/icons?i=html,css,js,ts,react,nodejs,express,mongodb,git,github&theme=dark&perline=10" />
+</p>
+
+## Cards
+
+### GitHub Stats Card
+
+Shows public repository count, followers, following, stars, forks, and profile bio.
+
+Endpoint:
+
+```txt
+/api/stats?username=USERNAME
+```
+
+Markdown:
+
+```md
+![GitHub Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat)
+```
+
+With theme and custom colors:
+
+```md
+![GitHub Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=radical&title_color=fff&text_color=f8d847&bg_color=141321)
+```
+
+### Top Languages Card
+
+Shows the most-used languages from public, non-forked repositories. Language usage is calculated from GitHub language byte data where available.
+
+Endpoint:
+
+```txt
+/api/top-langs?username=USERNAME
+```
+
+Markdown:
+
+```md
+![Top Languages](https://github-profile-plus.onrender.com/api/top-langs?username=octocat&theme=tokyonight)
+```
+
+### GitHub Streak Card
+
+Shows total recent public events, current streak, and longest streak based on public GitHub activity available through the GitHub API.
+
+Endpoint:
+
+```txt
+/api/streak?username=USERNAME
+```
+
+The `user` parameter is also supported:
+
+```md
+![GitHub Streak](https://github-profile-plus.onrender.com/api/streak?user=octocat&theme=dark)
+```
+
+Note: this card uses public GitHub API activity, so it cannot perfectly reproduce private contribution graph data unless the service is extended with a GitHub GraphQL contribution-calendar implementation and an appropriate token.
+
+### Trophies Card
+
+Shows achievement-style profile trophies.
+
+Endpoint:
+
+```txt
+/api/trophies?username=USERNAME
+```
+
+Markdown:
+
+```md
+![GitHub Trophies](https://github-profile-plus.onrender.com/api/trophies?username=octocat&theme=gruvbox)
+```
+
+### Badge Endpoint
+
+Create Shields-style SVG badges.
+
+Endpoint:
+
+```txt
+/api/badge?label=LABEL&message=MESSAGE&color=COLOR
+```
+
+Markdown:
+
+```md
+![Status](https://github-profile-plus.onrender.com/api/badge?label=build&message=passing&color=brightgreen)
+![TypeScript](https://github-profile-plus.onrender.com/api/badge?label=code&message=typescript&color=3178c6)
+```
+
+Options:
+
+| Name | Description | Example |
+| --- | --- | --- |
+| `label` | Left-side badge text | `build` |
+| `message` | Right-side badge text | `passing` |
+| `status` | Alias for `message` | `online` |
+| `color` | Right-side color alias or hex | `brightgreen`, `blue`, `3178c6` |
+| `labelColor` | Left-side color | `555` |
+| `style` | Badge style | `flat`, `flat-square`, `for-the-badge` |
+| `logo` | Small text logo mark | `TS` |
+
+Supported color aliases include `brightgreen`, `green`, `yellowgreen`, `yellow`, `orange`, `red`, `blue`, `grey`, `gray`, `lightgrey`, and `lightgray`.
+
+## Skill Icons
+
+Show technology icons in a single SVG, compatible with the Skill Icons-style URL format.
+
+Endpoint:
+
+```txt
+/icons?i=ICON_1,ICON_2,ICON_3
+```
+
+Markdown:
+
+```md
+[![My Skills](https://github-profile-plus.onrender.com/icons?i=js,ts,react,nodejs,express,mongodb,git&theme=dark)](https://github-profile-plus.onrender.com)
+```
+
+Light theme:
+
+```md
+![My Skills](https://github-profile-plus.onrender.com/icons?i=java,kotlin,nodejs,figma&theme=light)
+```
+
+Icons per line:
+
+```md
+![My Skills](https://github-profile-plus.onrender.com/icons?i=aws,gcp,azure,react,vue,flutter&perline=3)
+```
+
+Useful endpoints:
+
+| Endpoint | Description |
+| --- | --- |
+| `/icons?i=js,html,css` | Render selected icons |
+| `/icons?i=all` | Render all supported icons |
+| `/api/skill-icons?icons=js,ts,react` | Alias for selected icons |
+| `/api/icons` | JSON list of supported icon IDs |
+| `/api/svgs` | JSON map of icon SVG content |
+
+Common icon aliases:
+
+| Alias | Icon |
+| --- | --- |
+| `js` | `javascript` |
+| `ts` | `typescript` |
+| `py` | `python` |
+| `go` | `golang` |
+| `next` | `nextjs` |
+| `mongo` | `mongodb` |
+| `postgres` | `postgresql` |
+| `k8s` | `kubernetes` |
+| `tailwind` | `tailwindcss` |
+| `express` | `expressjs` |
+| `md` | `markdown` |
+
+## Customization
+
+Common query options for card endpoints:
+
+| Name | Description | Example |
+| --- | --- | --- |
+| `theme` | Built-in theme name | `radical` |
+| `bg_color` | Card background color | `141321` |
+| `text_color` | Body text color | `ffffff` |
+| `title_color` | Title/accent color | `fe428e` |
+| `icon_color` | Accent/icon color | `79ff97` |
+| `border_color` | Border color | `e4e2e2` |
+| `hide_border` | Transparent border | `true` |
+| `background` | Direct theme background override | `#151515` |
+| `text` | Direct text override | `#ffffff` |
+| `accent` | Direct accent override | `#58a6ff` |
+| `border` | Direct border override | `#30363d` |
+
+Built-in themes:
+
+```txt
+light, dark, default, transparent, radical, tokyonight, gruvbox, onedark, dracula, ocean, solarized
+```
+
+Example:
+
+```md
+![Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=dracula&hide_border=true)
+```
+
+Transparent card:
+
+```md
+![Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=transparent)
+```
+
+## API Reference
+
+| Endpoint | Method | Returns | Description |
+| --- | --- | --- | --- |
+| `/api/health` | `GET` | JSON | Service health check |
+| `/api/stats` | `GET` | SVG | GitHub profile stats card |
+| `/api/top-langs` | `GET` | SVG | Top languages card |
+| `/api/streak` | `GET` | SVG | Contribution streak card |
+| `/api/trophies` | `GET` | SVG | GitHub trophies card |
+| `/api/badge` | `GET` | SVG | Custom badge |
+| `/badge` | `GET` | SVG | Badge alias |
+| `/icons` | `GET` | SVG | Skill icons |
+| `/api/skill-icons` | `GET` | SVG | Skill icons alias |
+| `/api/icons` | `GET` | JSON | Supported icon IDs |
+| `/api/svgs` | `GET` | JSON | Raw icon SVG map |
+
+Health check:
+
 ```bash
-git clone <repo-url>
+curl https://github-profile-plus.onrender.com/api/health
+```
+
+Example response:
+
+```json
+{
+  "status": "ok",
+  "uptime": 123.45,
+  "node_env": "production",
+  "has_github_token": true
+}
+```
+
+## Self-hosting
+
+### Requirements
+
+- Node.js 18+
+- npm
+- Optional GitHub Personal Access Token for higher GitHub API limits
+
+### Local Setup
+
+```bash
+git clone https://github.com/im-vishu/github-profile-plus.git
 cd github-profile-plus
 npm install
-```
-
-2. (Optional) Provide a GitHub token to increase API rate limits:
-- macOS / Linux:
-```bash
-export GITHUB_TOKEN="ghp_..."
 npm run dev
 ```
-- Windows (PowerShell):
+
+The development server starts on:
+
+```txt
+http://localhost:3000
+```
+
+### Production Build
+
+```bash
+npm run build
+npm start
+```
+
+### Environment Variables
+
+| Name | Description |
+| --- | --- |
+| `PORT` | Server port. Defaults to `3000` |
+| `GITHUB_TOKEN` | Optional GitHub token for higher API limits |
+| `NODE_ENV` | Runtime environment |
+
+PowerShell example:
+
 ```powershell
-$env:GITHUB_TOKEN="ghp_..."
+$env:GITHUB_TOKEN="ghp_your_token_here"
 npm run dev
 ```
 
-3. Run the development server
+Linux/macOS example:
+
 ```bash
+export GITHUB_TOKEN="ghp_your_token_here"
 npm run dev
 ```
-The dev server uses `ts-node-dev` and restarts automatically on file changes.
 
-## Available npm scripts
-- `npm run dev` — start dev server with `ts-node-dev`
-- (Add production build/start scripts as needed, e.g., `build` and `start` using `tsc`)
+## Project Structure
 
-## Environment variables
-- `GITHUB_TOKEN` — (optional) GitHub PAT to increase API rate limits and access private data if required.
+```txt
+src/
+  api/                 Route handlers
+  assets/skill-icons/  Local Skill Icons SVG assets
+  middleware/          Security, validation, and rate limiting
+  services/            GitHub and skill icon services
+  templates/           SVG renderers and EJS templates
+  theme/               Theme presets and customization helpers
+```
 
-## API Endpoints
+## Verification
 
-All endpoints that return cards respond with `Content-Type: image/svg+xml`.
+Useful checks:
 
-- GET `/api/health`
-  - Returns JSON health info: `{ status: "ok", uptime: ... }`
+```bash
+npm run build
+npm run typecheck
+npx jest --runInBand --coverage=false
+```
 
-- GET `/api/stats`
-  - Query params:
-    - `username` (required) — GitHub username
-    - `theme` (optional) — theme name (`light`, `dark`, etc.)
-    - Custom theme overrides — supported via query keys defined in `getCustomThemeFromQuery`
-  - Example:
-    - `/api/stats?username=octocat&theme=dark`
+## Credits
 
-- GET `/api/top-langs`
-  - Query params:
-    - `username` (required)
-    - `theme` (optional)
-  - Example:
-    - `/api/top-langs?username=octocat&theme=light`
+GitHub Profile Plus is inspired by the excellent README tooling ecosystem:
 
-- GET `/api/trophies`
-  - Query params:
-    - `username` (required)
-    - `theme` (optional)
-  - Example:
-    - `/api/trophies?username=octocat&theme=radical`
+- GitHub Readme Stats by Anurag Hazra
+- GitHub Readme Streak Stats by DenverCoder1
+- Skill Icons
+- Shields-style badges
 
-Notes about theming:
-- Use a built-in theme name via `?theme=light` (or `dark`, etc.).
-- Use custom theme overrides via the query params supported by `getCustomThemeFromQuery` (e.g., `?bg_color=#fff&text_color=#000`). The exact parameter keys depend on your `theme` implementation — check `src/theme.ts`.
-
-## Project layout (important files)
-- src/
-  - app.ts — Express app, route registration
-  - api/
-    - stats.ts — `/api/stats` handler (default export)
-    - topLangs.ts — `/api/top-langs` handler (default export)
-    - trophies.ts — `/api/trophies` handler (default export)
-  - services/
-    - github.ts — GitHub helpers (exports `getGitHubProfileStats`, `getUserTopLanguages`, `TopLanguage` interface)
-  - templates/
-    - topLangs.ts — SVG renderer for top languages
-    - card.ts / trophiesCard.ts — other SVG templates
-  - theme.ts — theming utilities (`resolveTheme`, `getCustomThemeFromQuery`, `Theme` type)
-
-## Implementation notes & recommendations
-- Include `GITHUB_TOKEN` in axios headers inside `src/services/github.ts` if present:
-  ```ts
-  const headers = process.env.GITHUB_TOKEN ? { Authorization: `token ${process.env.GITHUB_TOKEN}` } : {};
-  axios.get(url, { headers });
-  ```
-- Add caching (in-memory or Redis) for GitHub responses to reduce API calls and improve performance.
-- Sanitize and validate user-supplied query parameters (especially for colors or fonts).
-- For production, build TypeScript to JS (`tsc`) and run the compiled output with Node instead of `ts-node-dev`.
-
-## Troubleshooting / Common issues
-- "Cannot find module '../templates/topLangs'":
-  - Ensure `src/templates/topLangs.ts` exists and the import path matches exactly.
-- "Module ... has no default export":
-  - Route handlers should default-export the handler:
-    ```ts
-    export default async function routeHandler(req, res) { ... }
-    ```
-  - And import without braces:
-    ```ts
-    import statsRoute from "./api/stats";
-    ```
-- Missing types for packages (example: `cors`):
-  - Install the package and its types:
-    ```bash
-    npm install cors
-    npm install --save-dev @types/cors
-    ```
-
-## Extending the project
-- Add new endpoints in `src/api/` (keep the default export pattern).
-- Add new SVG templates in `src/templates/` and call them from API handlers.
-- Expand `src/services/github.ts` to fetch additional data (contributions, language bytes, repo stats).
-- Add unit/integration tests for handlers and templates.
-
-## Contributing
-Contributions are welcome. Suggested workflow:
-1. Fork the repository
-2. Create a feature branch
-3. Open a pull request with a clear description and tests if applicable
+This project brings similar README-friendly ideas together in one Express + TypeScript service.
 
 ## License
-MIT
 
-## Contact / Support
-If you encounter issues or want additional features (more cards, themes, caching examples), open an issue or submit a PR.
-```
+ISC
