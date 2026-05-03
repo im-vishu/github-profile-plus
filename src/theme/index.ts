@@ -27,7 +27,18 @@ export function getCustomThemeFromQuery(query: Record<string, string | undefined
   for (const k of keys) {
     if (query[k]) out[k] = query[k]!;
   }
+  if (query.bg_color) out.background = withHash(query.bg_color);
+  if (query.text_color) out.text = withHash(query.text_color);
+  if (query.title_color) out.accent = withHash(query.title_color);
+  if (query.icon_color) out.accent = withHash(query.icon_color);
+  if (query.border_color) out.border = withHash(query.border_color);
+  if (query.hide_border === "true") out.border = "#0000";
   return out;
+}
+
+function withHash(value: string): string {
+  if (/^[0-9a-f]{3,8}$/i.test(value)) return `#${value}`;
+  return value;
 }
 
 // Re-export the Theme type for consumers

@@ -1,56 +1,46 @@
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  width="420"
-  height="170"
-  viewBox="0 0 420 170"
+  width="495"
+  height="195"
+  viewBox="0 0 495 195"
   role="img"
   aria-label="GitHub profile stats for <%= stats.name %>"
 >
   <style>
     .bg { fill: <%= theme.background %>; }
-    .border { fill: none; stroke: <%= theme.border %>; stroke-width: 2; }
-    .title { fill: <%= theme.text %>; font: 700 16px 'Segoe UI', Ubuntu, Sans-Serif; }
-    .label { fill: <%= theme.mutedText || theme.text %>; font: 600 12px 'Segoe UI', Ubuntu, Sans-Serif; }
-    .value { fill: <%= theme.accent %>; font: 700 14px 'Segoe UI', Ubuntu, Sans-Serif; }
-    .bio { fill: <%= theme.text %>; font: 400 11px 'Segoe UI', Ubuntu, Sans-Serif; opacity: 0.9; }
+    .border { fill: none; stroke: <%= theme.border %>; stroke-width: 1; }
+    .title { fill: <%= theme.accent %>; font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif; }
+    .stat { fill: <%= theme.text %>; font: 600 14px 'Segoe UI', Ubuntu, Sans-Serif; }
+    .muted { fill: <%= theme.mutedText || theme.text %>; font: 400 12px 'Segoe UI', Ubuntu, Sans-Serif; opacity: 0.9; }
+    .icon { fill: <%= theme.accent %>; }
+    .stagger { opacity: 0; animation: fadeIn .35s ease forwards; }
+    .s1 { animation-delay: 150ms; } .s2 { animation-delay: 300ms; } .s3 { animation-delay: 450ms; }
+    .s4 { animation-delay: 600ms; } .s5 { animation-delay: 750ms; }
+    @keyframes fadeIn { to { opacity: 1; } }
   </style>
 
-  <rect x="0" y="0" width="420" height="170" rx="12" class="bg"/>
-  <rect x="1" y="1" width="418" height="168" rx="11" class="border"/>
+  <rect x="0.5" y="0.5" width="494" height="194" rx="4.5" class="bg"/>
+  <rect x="0.5" y="0.5" width="494" height="194" rx="4.5" class="border"/>
 
-  <!-- Avatar -->
-  <defs>
-    <clipPath id="avatarClip">
-      <circle cx="55" cy="55" r="28"/>
-    </clipPath>
-  </defs>
+  <text x="25" y="35" class="title"><%= stats.name %>'s GitHub Stats</text>
 
-  <image
-    href="<%= stats.avatar_url %>"
-    x="27"
-    y="27"
-    width="56"
-    height="56"
-    clip-path="url(#avatarClip)"
-    preserveAspectRatio="xMidYMid slice"
-  />
+  <% const rows = [
+    ['★', 'Total Stars Earned', stats.total_stars],
+    ['⑂', 'Total Forks', stats.total_forks],
+    ['⌘', 'Total Public Repos', stats.public_repos],
+    ['◉', 'Followers', stats.followers],
+    ['↗', 'Following', stats.following],
+  ]; %>
+  <% rows.forEach((row, index) => { %>
+    <g class="stagger s<%= index + 1 %>" transform="translate(25, <%= 65 + index * 23 %>)">
+      <text class="icon" x="0" y="0" font-size="15"><%= row[0] %></text>
+      <text class="stat" x="25" y="0"><%= row[1] %>:</text>
+      <text class="stat" x="210" y="0"><%= row[2] %></text>
+    </g>
+  <% }) %>
 
-  <!-- Title -->
-  <text x="98" y="45" class="title"><%= stats.name %></text>
-
-  <!-- Bio (trim to keep SVG neat) -->
-  <% const bio = (stats.bio || '').replace(/\s+/g,' ').trim(); %>
-  <text x="98" y="66" class="bio">
-    <%= bio.length > 46 ? bio.slice(0, 46) + "..." : bio %>
+  <% const bio = (stats.bio || `@${stats.login}`).replace(/\s+/g,' ').trim(); %>
+  <text x="25" y="178" class="muted">
+    <%= bio.length > 74 ? bio.slice(0, 74) + "..." : bio %>
   </text>
-
-  <!-- Stats -->
-  <text x="30" y="115" class="label">Repos</text>
-  <text x="30" y="136" class="value"><%= stats.public_repos %></text>
-
-  <text x="150" y="115" class="label">Followers</text>
-  <text x="150" y="136" class="value"><%= stats.followers %></text>
-
-  <text x="290" y="115" class="label">Following</text>
-  <text x="290" y="136" class="value"><%= stats.following %></text>
 </svg>
