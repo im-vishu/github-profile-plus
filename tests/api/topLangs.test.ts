@@ -19,6 +19,6 @@ describe("/api/top-langs", () => {
     const res = await request(app).get("/api/top-langs").query({ username: "octocat" });
     expect(res.status).toBe(200);
     expect(res.headers["content-type"]).toMatch(/image\/svg\+xml/);
-    expect(res.text).toContain("<svg");
+    expect(Buffer.from(res.body).toString("utf8")).toContain("<svg");
   });
 });
