@@ -1,47 +1,76 @@
 <div align="center">
-  <h1>GitHub Profile Plus</h1>
-  <p>Dynamic GitHub profile cards, streak stats, trophies, badges, and skill icons for your README.</p>
+
+  <h1>GitHub Profile Plus 🚀</h1>
+
+  <p>
+    Dynamic <b>SVG GitHub profile cards</b> for your README —
+    📊 Stats • 📈 Top Languages • 🔥 Streak • 🏆 Trophies • 🏷️ Badges • 🧩 Skill Icons
+  </p>
+
+  <!-- Badges -->
+  <p>
+    <a href="https://github-profile-plus.onrender.com/api/health">
+      <img alt="API" src="https://github-profile-plus.onrender.com/api/badge?label=api&message=online&color=brightgreen&style=flat-square" />
+    </a>
+    <a href="https://github.com/im-vishu/github-profile-plus">
+      <img alt="TypeScript + Express" src="https://github-profile-plus.onrender.com/api/badge?label=TypeScript&message=Express&color=3178c6&style=flat-square" />
+    </a>
+    <a href="https://github-profile-plus.onrender.com/api/health">
+      <img alt="Node" src="https://github-profile-plus.onrender.com/api/badge?label=node&message=20%2B&color=339933&style=flat-square" />
+    </a>
+    <a href="https://github-profile-plus.onrender.com/icons?i=ts,nodejs,express,mongodb,git&theme=dark">
+      <img alt="Skill Icons" src="https://github-profile-plus.onrender.com/api/badge?label=skill-icons&message=ready&color=blue&style=flat-square" />
+    </a>
+  </p>
+
+  <!-- Quick Links -->
+  <p>
+    <a href="#-quick-start"><b>⚡ Quick Start</b></a> &nbsp;•&nbsp;
+    <a href="#-live-demos"><b>🖼️ Live Demos</b></a> &nbsp;•&nbsp;
+    <a href="#-cards"><b>🧩 Cards</b></a> &nbsp;•&nbsp;
+    <a href="#-skill-icons"><b>🧠 Skill Icons</b></a> &nbsp;•&nbsp;
+    <a href="#-customization"><b>🎨 Customization</b></a> &nbsp;•&nbsp;
+    <a href="#-self-hosting"><b>🏗️ Self-hosting</b></a> &nbsp;•&nbsp;
+    <a href="#-api-reference"><b>📚 API Reference</b></a>
+  </p>
+
+  <!-- Mini Preview Row -->
+  <p>
+    <img alt="Stats preview" height="95" src="https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=dark" />
+    <img alt="Top langs preview" height="95" src="https://github-profile-plus.onrender.com/api/top-langs?username=octocat&theme=dark" />
+  </p>
+
 </div>
 
-<p align="center">
-  <a href="https://github-profile-plus.onrender.com/api/health">
-    <img alt="API Health" src="https://github-profile-plus.onrender.com/api/badge?label=api&message=online&color=brightgreen" />
-  </a>
-  <a href="https://github.com/im-vishu/github-profile-plus">
-    <img alt="Built with TypeScript" src="https://github-profile-plus.onrender.com/api/badge?label=typescript&message=express&color=3178c6" />
-  </a>
-  <a href="https://github-profile-plus.onrender.com/icons?i=ts,nodejs,express,mongodb,git&theme=dark">
-    <img alt="Skill Icons" src="https://github-profile-plus.onrender.com/api/badge?label=skill-icons&message=ready&color=blue" />
-  </a>
-</p>
+---
 
-<p align="center">
-  <a href="#quick-start">Quick Start</a>
-  -
-  <a href="#cards">Cards</a>
-  -
-  <a href="#skill-icons">Skill Icons</a>
-  -
-  <a href="#customization">Customization</a>
-  -
-  <a href="#self-hosting">Self-hosting</a>
-</p>
+## ✨ Overview
 
-## Overview
+**GitHub Profile Plus** is an **Express + TypeScript** API that generates lightweight **SVG assets** for GitHub profile READMEs and documentation.
 
-GitHub Profile Plus is an Express + TypeScript API that generates lightweight SVG assets for GitHub profile READMEs. It combines the most useful ideas from GitHub Readme Stats, GitHub Readme Streak Stats, Shields-style badges, and Skill Icons into one self-hostable service.
+It combines the most useful ideas from:
+- 📊 GitHub profile stats cards
+- 🔥 Streak stats
+- 🏆 Trophies
+- 🏷️ Shields-style badges
+- 🧩 Skill icons
 
-Live base URL:
+✅ All card and icon endpoints return **SVG** and can be embedded directly in:
+- GitHub READMEs
+- Docs
+- Portfolio sites
+
+🌐 Live base URL:
 
 ```txt
 https://github-profile-plus.onrender.com
 ```
 
-All card and icon endpoints return SVG and can be embedded directly in Markdown, HTML, profile READMEs, documentation pages, and portfolio sites.
+---
 
-## Quick Start
+## ⚡ Quick Start
 
-Replace `octocat` with your GitHub username.
+Replace `octocat` with your GitHub username:
 
 ```md
 ![GitHub Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=radical)
@@ -55,7 +84,9 @@ Replace `octocat` with your GitHub username.
 ![My Skills](https://github-profile-plus.onrender.com/icons?i=js,ts,react,nodejs,express,mongodb,git&theme=dark)
 ```
 
-## Live Demos
+---
+
+## 🖼️ Live Demos
 
 <p align="center">
   <img alt="GitHub stats card" src="https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=radical" />
@@ -73,98 +104,98 @@ Replace `octocat` with your GitHub username.
   <img alt="Skill icons" src="https://github-profile-plus.onrender.com/icons?i=html,css,js,ts,react,nodejs,express,mongodb,git,github&theme=dark&perline=10" />
 </p>
 
-## Cards
+---
 
-### GitHub Stats Card
+## 🧩 Cards
 
-Shows public repository count, followers, following, stars, forks, and profile bio.
+### 📊 GitHub Stats Card
 
-Endpoint:
+✅ Shows public repository count, followers, following, stars, forks, and profile bio.
 
+**Endpoint**
 ```txt
 /api/stats?username=USERNAME
 ```
 
-Markdown:
-
+**Markdown**
 ```md
 ![GitHub Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat)
 ```
 
-With theme and custom colors:
-
+**Theme + custom colors**
 ```md
 ![GitHub Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=radical&title_color=fff&text_color=f8d847&bg_color=141321)
 ```
 
-### Top Languages Card
+---
 
-Shows the most-used languages from public, non-forked repositories. Language usage is calculated from GitHub language byte data where available.
+### 📈 Top Languages Card
 
-Endpoint:
+✅ Shows most-used languages from public, non-forked repositories (based on GitHub language byte data).
 
+**Endpoint**
 ```txt
 /api/top-langs?username=USERNAME
 ```
 
-Markdown:
-
+**Markdown**
 ```md
 ![Top Languages](https://github-profile-plus.onrender.com/api/top-langs?username=octocat&theme=tokyonight)
 ```
 
-### GitHub Streak Card
+---
 
-Shows total recent public events, current streak, and longest streak based on public GitHub activity available through the GitHub API.
+### 🔥 GitHub Streak Card
 
-Endpoint:
+✅ Shows activity streak based on public GitHub API activity.
 
+**Endpoint**
 ```txt
 /api/streak?username=USERNAME
 ```
 
-The `user` parameter is also supported:
+Also supports `user=`:
 
 ```md
 ![GitHub Streak](https://github-profile-plus.onrender.com/api/streak?user=octocat&theme=dark)
 ```
 
-Note: this card uses public GitHub API activity, so it cannot perfectly reproduce private contribution graph data unless the service is extended with a GitHub GraphQL contribution-calendar implementation and an appropriate token.
+ℹ️ Note: This uses public activity and cannot perfectly reproduce private contributions unless extended with a GraphQL contribution-calendar approach + token.
 
-### Trophies Card
+---
 
-Shows achievement-style profile trophies.
+### 🏆 Trophies Card
 
-Endpoint:
+✅ Achievement-style trophies.
 
+**Endpoint**
 ```txt
 /api/trophies?username=USERNAME
 ```
 
-Markdown:
-
+**Markdown**
 ```md
 ![GitHub Trophies](https://github-profile-plus.onrender.com/api/trophies?username=octocat&theme=gruvbox)
 ```
 
-### Badge Endpoint
+---
 
-Create Shields-style SVG badges.
+### 🏷️ Badge Endpoint
 
-Endpoint:
+Create Shields-style badges.
 
+**Endpoint**
 ```txt
 /api/badge?label=LABEL&message=MESSAGE&color=COLOR
 ```
 
-Markdown:
-
+**Markdown**
 ```md
 ![Status](https://github-profile-plus.onrender.com/api/badge?label=build&message=passing&color=brightgreen)
 ![TypeScript](https://github-profile-plus.onrender.com/api/badge?label=code&message=typescript&color=3178c6)
 ```
 
-Options:
+**Options**
 
 | Name | Description | Example |
 | --- | --- | --- |
@@ -176,37 +207,35 @@ Options:
 | `style` | Badge style | `flat`, `flat-square`, `for-the-badge` |
 | `logo` | Small text logo mark | `TS` |
 
-Supported color aliases include `brightgreen`, `green`, `yellowgreen`, `yellow`, `orange`, `red`, `blue`, `grey`, `gray`, `lightgrey`, and `lightgray`.
+🎨 Supported color aliases include: `brightgreen`, `green`, `yellowgreen`, `yellow`, `orange`, `red`, `blue`, `grey`, `gray`, `lightgrey`, and `lightgray`.
 
-## Skill Icons
+---
 
-Show technology icons in a single SVG, compatible with the Skill Icons-style URL format.
+## 🧠 Skill Icons
 
-Endpoint:
+Render technology icons in a single SVG.
 
+**Endpoint**
 ```txt
 /icons?i=ICON_1,ICON_2,ICON_3
 ```
 
-Markdown:
-
+**Markdown**
 ```md
 [![My Skills](https://github-profile-plus.onrender.com/icons?i=js,ts,react,nodejs,express,mongodb,git&theme=dark)](https://github-profile-plus.onrender.com)
 ```
 
-Light theme:
-
+**Light theme**
 ```md
 ![My Skills](https://github-profile-plus.onrender.com/icons?i=java,kotlin,nodejs,figma&theme=light)
 ```
 
-Icons per line:
-
+**Icons per line**
 ```md
 ![My Skills](https://github-profile-plus.onrender.com/icons?i=aws,gcp,azure,react,vue,flutter&perline=3)
 ```
 
-Useful endpoints:
+**Useful endpoints**
 
 | Endpoint | Description |
 | --- | --- |
@@ -216,7 +245,7 @@ Useful endpoints:
 | `/api/icons` | JSON list of supported icon IDs |
 | `/api/svgs` | JSON map of icon SVG content |
 
-Common icon aliases:
+**Common aliases**
 
 | Alias | Icon |
 | --- | --- |
@@ -232,9 +261,11 @@ Common icon aliases:
 | `express` | `expressjs` |
 | `md` | `markdown` |
 
-## Customization
+---
 
-Common query options for card endpoints:
+## 🎨 Customization
+
+Common query options:
 
 | Name | Description | Example |
 | --- | --- | --- |
@@ -245,10 +276,7 @@ Common query options for card endpoints:
 | `icon_color` | Accent/icon color | `79ff97` |
 | `border_color` | Border color | `e4e2e2` |
 | `hide_border` | Transparent border | `true` |
-| `background` | Direct theme background override | `#151515` |
-| `text` | Direct text override | `#ffffff` |
-| `accent` | Direct accent override | `#58a6ff` |
-| `border` | Direct border override | `#30363d` |
+| `style` | Badge style | `flat-square` |
 
 Built-in themes:
 
@@ -268,7 +296,9 @@ Transparent card:
 ![Stats](https://github-profile-plus.onrender.com/api/stats?username=octocat&theme=transparent)
 ```
 
-## API Reference
+---
+
+## 📚 API Reference
 
 | Endpoint | Method | Returns | Description |
 | --- | --- | --- | --- |
@@ -301,15 +331,16 @@ Example response:
 }
 ```
 
-## Self-hosting
+---
 
-### Requirements
+## 🏗️ Self-hosting
 
+### ✅ Requirements
 - Node.js 18+
 - npm
-- Optional GitHub Personal Access Token for higher GitHub API limits
+- (Optional) GitHub Personal Access Token for higher GitHub API limits
 
-### Local Setup
+### 🧪 Local Setup
 
 ```bash
 git clone https://github.com/im-vishu/github-profile-plus.git
@@ -318,26 +349,26 @@ npm install
 npm run dev
 ```
 
-The development server starts on:
+Dev server:
 
 ```txt
 http://localhost:3000
 ```
 
-### Production Build
+### 🚀 Production Build
 
 ```bash
 npm run build
 npm start
 ```
 
-### Environment Variables
+### 🔐 Environment Variables
 
 | Name | Description |
 | --- | --- |
-| `PORT` | Server port. Defaults to `3000` |
-| `GITHUB_TOKEN` | Optional GitHub token for higher API limits |
-| `NODE_ENV` | Runtime environment |
+| `PORT` | Server port (default: `3000`) |
+| `GITHUB_TOKEN` | Optional GitHub token (higher API limits) |
+| `NODE_ENV` | Runtime environment (`development` / `production`) |
 
 PowerShell example:
 
@@ -353,7 +384,9 @@ export GITHUB_TOKEN="ghp_your_token_here"
 npm run dev
 ```
 
-## Project Structure
+---
+
+## 🗂️ Project Structure
 
 ```txt
 src/
@@ -365,9 +398,11 @@ src/
   theme/               Theme presets and customization helpers
 ```
 
-## Verification
+---
 
-Useful checks:
+## ✅ Verification
+
+Helpful commands:
 
 ```bash
 npm run build
@@ -375,17 +410,18 @@ npm run typecheck
 npx jest --runInBand --coverage=false
 ```
 
-## Credits
+---
 
-GitHub Profile Plus is inspired by the excellent README tooling ecosystem:
+## 🙌 Credits
 
-- GitHub Readme Stats by Anurag Hazra
-- GitHub Readme Streak Stats by DenverCoder1
+Inspired by the excellent README tooling ecosystem:
+- GitHub Readme Stats
+- GitHub Readme Streak Stats
 - Skill Icons
 - Shields-style badges
 
-This project brings similar README-friendly ideas together in one Express + TypeScript service.
+---
 
-## License
+## 📄 License
 
 ISC
