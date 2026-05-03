@@ -1,16 +1,31 @@
 # Step 1: Build
-FROM node:20-alpine AS builder
+FROM node:20-bookworm-slim AS builder
 WORKDIR /app
-COPY package.json tsconfig.json ./
-RUN npm install
+
+# Install deps
+COPY package*.json ./
+RUN npm ci
+
+# Copy source + build assets needed for build step
+COPY tsconfig.json ./
+COPY scripts ./scripts
 COPY src ./src
+
+# Build (tsc + copy EJS templates into dist/)
 RUN npm run build
 
 # Step 2: Runtime
-FROM node:20-alpine
+FROM node:20-bookworm-slim AS runtime
 WORKDIR /app
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/node_modules ./node_modules
+
+ENV NODE_ENV=production
+
+# Only production deps
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Copy built output
 COPY --from=builder /app/dist ./dist
-CMD ["node", "dist/app.js"]
+
 EXPOSE 3000
+CMD ["node", "dist/app.js"]
