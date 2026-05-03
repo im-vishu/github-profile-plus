@@ -3,11 +3,17 @@ import path from "path";
 import type { Trophy } from "../services/trophies";
 import type { Theme } from "../theme";
 
-const templatePath = path.join(__dirname, "trophiesCard.ejs");
+const templatePath = path.join(__dirname, "trophies.ejs");
 
-export function renderTrophiesCard(username: string, trophies: Trophy[], theme: Theme): string {
-  return ejs.renderFile(templatePath, { username, trophies, theme }, { rmWhitespace: true }, (err, str) => {
-    if (err || !str) throw err;
-    return str;
-  }) as unknown as string;
+export async function renderTrophiesCard(
+  username: string,
+  trophies: Trophy[],
+  theme: Theme
+): Promise<string> {
+  const svg = await ejs.renderFile(
+    templatePath,
+    { username, trophies, theme },
+    { rmWhitespace: true }
+  );
+  return String(svg);
 }
