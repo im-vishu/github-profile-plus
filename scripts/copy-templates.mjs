@@ -4,6 +4,7 @@ import path from "node:path";
 const root = process.cwd();
 const srcDir = path.join(root, "src", "templates");
 const outDir = path.join(root, "dist", "templates");
+
 const assetsDir = path.join(root, "src", "assets");
 const assetsOutDir = path.join(root, "dist", "assets");
 
@@ -21,5 +22,10 @@ for (const f of ejsFiles) {
   console.log(`[copy-templates] Copied ${f}`);
 }
 
-await cp(assetsDir, assetsOutDir, { recursive: true });
-console.log("[copy-templates] Copied assets");
+// Copy assets if present (don’t fail prod build if folder missing)
+try {
+  await cp(assetsDir, assetsOutDir, { recursive: true });
+  console.log("[copy-templates] Copied assets");
+} catch (err) {
+  console.warn("[copy-templates] No assets copied (src/assets missing or unreadable).");
+}
