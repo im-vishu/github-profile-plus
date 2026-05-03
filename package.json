@@ -1,7 +1,7 @@
 {
   "name": "github-profile-plus",
   "version": "1.0.0",
-  "description": "",
+  "description": "Themeable SVG GitHub profile cards (stats, top languages, trophies) — Express + TypeScript.",
   "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
@@ -21,6 +21,9 @@
     "url": "https://github.com/im-vishu/github-profile-plus/issues"
   },
   "homepage": "https://github.com/im-vishu/github-profile-plus#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/ejs": "^3.1.5",
