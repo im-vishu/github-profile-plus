@@ -5,10 +5,12 @@ import type { Theme } from "../theme";
 
 const templatePath = path.join(__dirname, "card.ejs");
 
-export function renderProfileCard(stats: GitHubProfileStats, theme: Theme): string {
-  // Synchronous render, fast enough for API (alternatively, use ejs.renderFile for async)
-  return ejs.renderFile(templatePath, { stats, theme }, { rmWhitespace: true }, (err, str) => {
-    if (err || !str) throw err;
-    return str;
-  }) as unknown as string;
+/**
+ * Render the profile stats SVG card using EJS template.
+ * NOTE: ejs.renderFile is async and returns a Promise when no callback is provided.
+ */
+export async function renderProfileCard(stats: GitHubProfileStats, theme: Theme): Promise<string> {
+  const svg = await ejs.renderFile(templatePath, { stats, theme }, { rmWhitespace: true });
+  // renderFile can technically return a non-string depending on options; normalize.
+  return String(svg);
 }
